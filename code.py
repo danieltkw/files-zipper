@@ -22,6 +22,7 @@ def get_all_files(base_folder):
 # Compress file using 7-Zip CLI with password and ultra compression
 def compress_file(file_path, password):
     archive_path = file_path + ".7z"
+    # define the level of zipping - and where is the 7zip
     try:
         subprocess.run([
             r"C:\\Program Files\\7-Zip\\7z.exe", "a", "-t7z", "-mx=9", f"-p{password}", archive_path, file_path
@@ -34,8 +35,10 @@ def compress_file(file_path, password):
 # // ------------------------------------------------------------
 # Main execution block
 def main():
+    # folder of files
     folder = r"C:\\Users\\Administrator\\Desktop\\books"
-    password = "Novo2020"
+    # password
+    password = "pass"
 
     all_files = get_all_files(folder)
     total_files = len(all_files)
