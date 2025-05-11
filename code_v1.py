@@ -64,8 +64,8 @@ def wrap_in_zip(formatless_path, original_file_path):
 
 # // ------------------------------------------------------------
 def main():
-    folder = r"C:\\Users\\Administrator\\Desktop\\aima-sef-correcao"
-    password = "Novo2020"
+    folder = r"C:\\Users\\Administrator\\Desktop\\aaa"
+    password = "pass"
 
     all_files = get_all_files(folder)
     total_files = len(all_files)
