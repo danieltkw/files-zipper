@@ -1,40 +1,40 @@
 
 
+# File Archival with 7-Zip and ZIP
 
-🔐 Secure File Obfuscation & Archival with 7-Zip + ZIP
-This script automates a multi-layer file packaging process designed for privacy, auditability, and obfuscation.
+Python script that processes files in the execution directory and generates encrypted archives using a two-layer container (7-Zip inside ZIP).
 
-🧰 What it does:
-Recursively scans a target folder for all files.
+Behavior:
+- Creates a 7z archive with encrypted headers (-mhe=on)
+- Renames the archive to a random name without extension
+- Wraps it into <original_filename>.zip
+- Deletes intermediate files
+- Never overwrites existing ZIPs (numeric suffix applied)
 
-For each file:
+Passwords:
+- User may enter a password or press ENTER
+- If ENTER is pressed, a random password is generated and shown once
+- User-provided passwords must satisfy:
+  - Minimum 8 characters
+  - At least 1 uppercase letter
+  - At least 4 letters
+  - At least 4 digits
+  - No character repeated more than twice
+- Input is masked with '*'
+- Passwords are never logged
 
-Saves the original filename inside a name.txt alongside the file.
+Output:
+file.txt → file.txt.zip  
+file.txt.zip contains one file: <random_uuid> (encrypted 7z archive)
 
-Encrypts both contents and filenames using 7-Zip (AES-256 + Ultra Compression).
+Self-test:
+python script.py --self-test
 
-Renames the resulting .7z archive to a UUID with no extension (formatless).
+Requirements:
+- Python 3.10+
+- 7-Zip (7z or 7za) available in PATH
+  
+- Install Python dependencies:
 
-Wraps that formatless file into a .zip archive using store mode (no compression), with the original filename as the .zip name.
+pip install tqdm
 
-Deletes the intermediate .7z file after the .zip is created.
-
-🔐 Inside each .zip:
-A single extensionless file (really a 7z archive with full encryption)
-
-Only users with the password and 7-Zip can extract the original content
-
-Inside the 7z archive:
-
-The original file
-
-A name.txt containing the real filename
-
-✅ Features:
-Strong encryption (AES-256) with hidden filenames
-
-Zero-leakage of original filenames externally
-
-Zip wrapping provides casual concealment and standard delivery
-
-Uses tqdm progress bar for visibility
